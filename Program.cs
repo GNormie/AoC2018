@@ -20,20 +20,10 @@ namespace AoC2018
     {
         static void Main(string[] args)
         {
-            string[] linesInput = File.ReadAllLines(@"C:\puzzle5.txt");
-
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            Console.WriteLine(DAY5.Problem1(linesInput[0]));
-            Console.WriteLine(DAY5.Problem2(linesInput[0]));
-
-            sw.Stop();
-            Console.WriteLine("ms: "+sw.ElapsedMilliseconds);
-
+            string[] linesInput = File.ReadAllLines(@"C:\puzzle6.txt");
+            DAY6.Problem1(linesInput);
+            DAY6.Problem2(linesInput);
             Console.ReadLine();
         }
-
-        
     }
 }
