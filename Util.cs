@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,11 @@ namespace AoC2018
 {
     public static class Util
     {
+        public static string ReadFromInputFolder(int problemNumber)
+        {
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Inputs\puzzle"+problemNumber+".txt");
+        }
+
         public static string Between(this string value, string a, string b = null)
         {
             int posA = value.IndexOf(a);
