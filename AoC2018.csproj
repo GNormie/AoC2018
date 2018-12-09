@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AoC.cs" />
     <Compile Include="Classes\DAY8.cs" />
     <Compile Include="Classes\DAY7.cs" />
     <Compile Include="Classes\DAY6.cs" />

@@ -19,7 +19,7 @@ namespace AoC2018
         public static int Problem1(string[] linesInput, out QuirkNode baseNode)
         {
             List<string> dataValuesSTR = linesInput[0].Split(' ').ToList();
-            List<int> dataValues = dataValuesSTR.Select(r => Convert.ToInt32(r)).ToList();
+            LinkedList<int> dataValues = new LinkedList<int>(dataValuesSTR.Select(r => Convert.ToInt32(r)));
 
             List<int> sumNumbers = new List<int>();
 
@@ -27,10 +27,7 @@ namespace AoC2018
             baseNode = new QuirkNode();
             baseNode.ID = (char)baseID;
 
-            while (dataValues.Count > 0)
-            {
-                baseNode = RecursiveEat(ref dataValues, ref sumNumbers, ref baseID);
-            }
+            baseNode = RecursiveEat(ref dataValues, ref sumNumbers, ref baseID);
 
             return sumNumbers.Sum(r => r);
         }
@@ -48,18 +45,18 @@ namespace AoC2018
         public class QuirkNode
         {
             public char ID;
-            public List<QuirkNode> ChildNodes = new List<QuirkNode>();
+            public LinkedList<QuirkNode> ChildNodes = new LinkedList<QuirkNode>();
             public List<int> lstMetadataEntries = new List<int>();
         }
 
-        public static QuirkNode RecursiveEat(ref List<int> dataValues, ref List<int> sumNumbers, ref int IDCarrier)
+        public static QuirkNode RecursiveEat(ref LinkedList<int> dataValues, ref List<int> sumNumbers, ref int IDCarrier)
         {
             IDCarrier++;
             int NumberOfChildNodes = dataValues.First();
             int NumberOfMetadataEntries = dataValues.Skip(1).First();
 
-            dataValues.RemoveAt(1);
-            dataValues.RemoveAt(0);
+            dataValues.RemoveFirst();
+            dataValues.RemoveFirst();
 
             QuirkNode node = new QuirkNode();
             node.ID = (char)IDCarrier;
@@ -70,7 +67,7 @@ namespace AoC2018
                 {
                     sumNumbers.Add(dataValues.First());
                     node.lstMetadataEntries.Add(dataValues.First());
-                    dataValues.RemoveAt(0);
+                    dataValues.RemoveFirst();
                 }
                 return node;
             }
@@ -79,13 +76,13 @@ namespace AoC2018
                 for (int i = 0; i < NumberOfChildNodes; i++)
                 {
                     QuirkNode childNode = RecursiveEat(ref dataValues, ref sumNumbers, ref IDCarrier);
-                    node.ChildNodes.Add(childNode);
+                    node.ChildNodes.AddLast(childNode);
                 }
                 for (int w = 0; w < NumberOfMetadataEntries; w++)
                 {
                     sumNumbers.Add(dataValues.First());
                     node.lstMetadataEntries.Add(dataValues.First());
-                    dataValues.RemoveAt(0);
+                    dataValues.RemoveFirst();
                 }
                 return node;
             }
