@@ -52,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -65,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DAY10.cs" />
     <Compile Include="Classes\DAY9.cs" />
     <Compile Include="Classes\DAY8.cs" />
     <Compile Include="Classes\DAY7.cs" />
@@ -83,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Inputs\puzzle1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Inputs\puzzle10.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\puzzle2.txt">

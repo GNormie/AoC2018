@@ -27,11 +27,12 @@ namespace AoC2018
             marbleCircle.AddFirst(1);
             marbleCircle.AddFirst(0);
 
-            List<Player> lstPlayers = new List<Player>();
+            LinkedList<Player> lstPlayers = new LinkedList<Player>();
             for (int i = 1; i < numberOfPlayers + 1; i++)
-                lstPlayers.Add(new Player(i));
+                lstPlayers.AddLast(new Player(i));
 
-            int currentPlayer = 3;
+            var currentPlayer = lstPlayers.First.Next.Next;
+            //int currentPlayer = 3;
 
             LinkedListNode<int> leCurrentNode = marbleCircle.Last;
             for (int currentMarble = 2; currentMarble < marbles; currentMarble++)
@@ -45,15 +46,15 @@ namespace AoC2018
                 }
                 else
                 {
-                    var player = lstPlayers.SingleOrDefault(r => r.playerID == currentPlayer);
-                    player.score += marble;
+                    var player = currentPlayer;//lstPlayers.SingleOrDefault(r => r.playerID == currentPlayer);
+                    player.Value.score += marble;
 
                     var insertPosition = GetPreviousCircular(leCurrentNode, 7);
-                    player.score += insertPosition.Value;
+                    player.Value.score += insertPosition.Value;
                     leCurrentNode = GetNextCircular(insertPosition);
                     marbleCircle.Remove(insertPosition);
                 }
-                currentPlayer = lstPlayers.ElementAt(GetNextCircular(lstPlayers.Count, currentPlayer - 1)).playerID;
+                currentPlayer = GetNextCircular(currentPlayer);//lstPlayers.ElementAt(GetNextCircular(lstPlayers.Count, currentPlayer - 1)).playerID;
             }
 
             return lstPlayers.Max(r => r.score);
@@ -67,7 +68,7 @@ namespace AoC2018
         public class Player
         {
             public int playerID;
-            public long score = 0;
+            public long score;
 
             public Player(int _playerID)
             {
@@ -75,7 +76,7 @@ namespace AoC2018
             }
         }
 
-        public static LinkedListNode<int> GetNextCircular(LinkedListNode<int> currentNode, int? count = null)
+        public static LinkedListNode<T> GetNextCircular<T>(LinkedListNode<T> currentNode, int? count = null)
         {
             if (count == null || count == 1)
             {
@@ -89,7 +90,7 @@ namespace AoC2018
             return currentNode;
         }
 
-        public static LinkedListNode<int> GetPreviousCircular(LinkedListNode<int> currentNode, int? count = null)
+        public static LinkedListNode<T> GetPreviousCircular<T>(LinkedListNode<T> currentNode, int? count = null)
         {
             if (count == null || count == 1)
             {
