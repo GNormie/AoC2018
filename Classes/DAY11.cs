@@ -74,7 +74,7 @@ namespace AoC2018
                     negativesCount++;
                 else
                     negativesCount = 0;
-                if (negativesCount >= 5)
+                if (negativesCount >= 1)
                     break;
                 maxEnergyCuadrants.Add(r + 1, new EnergyReading(currentTopEnergy.Value, r + 1, currentTopEnergy.Key));
             }
@@ -82,7 +82,6 @@ namespace AoC2018
             var topEnergy = maxEnergyCuadrants.OrderByDescending(wr => wr.Value.totalPower).First();
             Console.WriteLine(topEnergy.Value.coordinates.X + "," + topEnergy.Value.coordinates.Y + "," + topEnergy.Key);
             Console.WriteLine(topEnergy.Value.totalPower);
-            Console.ReadLine();
         }
 
         public static int GetPowerCellLevel(int X, int Y)

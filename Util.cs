@@ -10,6 +10,25 @@ namespace AoC2018
 {
     public static class Util
     {
+        public static void WriteToFile(StringBuilder sb)
+        {
+            File.WriteAllText(@"C:\OUTPUT.txt", String.Empty);
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"C:\OUTPUT.txt", true))
+            {
+                file.WriteLine(sb.ToString());
+            }
+        }
+
+        public static void WriteToFile(string sb)
+        {
+            File.WriteAllText(@"C:\OUTPUT.txt", String.Empty);
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"C:\OUTPUT.txt", true))
+            {
+                file.WriteLine(sb);
+            }
+        }
         public static string ReadFromInputFolder(int problemNumber)
         {
             return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Inputs\puzzle"+problemNumber+".txt");
