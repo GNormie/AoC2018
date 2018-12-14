@@ -20,7 +20,7 @@ namespace AoC2018
     {
         static void Main(string[] args)
         {
-            string[] linesInput = File.ReadAllLines(@"C:\puzzle13.txt");
+            string[] linesInput = File.ReadAllLines(@"C:\puzzle14.txt");
             foreach (string line in linesInput)
             {
 

@@ -10,10 +10,14 @@ namespace AoC2018
 {
     class DAY12
     {
-        public static void Run()
+        public static void Run(string path = null)
         {
             StringBuilder sb = new StringBuilder();
-            List<string> linesInput = File.ReadAllLines(Util.ReadFromInputFolder(12)).ToList();
+            List<string> linesInput;
+            if(path == null)
+                linesInput= File.ReadAllLines(Util.ReadFromInputFolder(12)).ToList();
+            else
+                linesInput = File.ReadAllLines(path).ToList(); 
             string baseGeneration = linesInput[0].Between("initial state: ");
 
             //Prepare initial state
@@ -32,7 +36,7 @@ namespace AoC2018
             Dictionary<string, string> producePlantsCombo = new Dictionary<string, string>();
             Dictionary<string, string> killPlantsCombo = new Dictionary<string, string>();
 
-            LinkedList<long> Differences = new LinkedList<long>();
+            LinkedList<long> SameDifferences = new LinkedList<long>();
 
             long mysteryConstant = 0;
 
@@ -90,20 +94,20 @@ namespace AoC2018
 
                 }
                 long prevDif = upComingGeneration.Where(r => r.plant == '#').Sum(w => w.potNumber) - llBaseGeneration.Where(r => r.plant == '#').Sum(w => w.potNumber);
-                Differences.AddLast(prevDif);
-                if (Differences.Any(r => r != prevDif))
-                    Differences.Clear();
+                SameDifferences.AddLast(prevDif);
+                if (SameDifferences.Any(r => r != prevDif))
+                    SameDifferences.Clear();
                 else
                 {
                     // After some point, the output seems displaced on a constant basis forever
                     // Mystery = TOTAL - (sameDif * Gen)
                     // so
                     // TOTAL = Mystery + (sameDif * Gen)
-                    if (Differences.Count >= 4)
+                    if (SameDifferences.Count >= 4)
                     {
                         long total = upComingGeneration.Where(r => r.plant == '#').Sum(w => w.potNumber);
-                        mysteryConstant = total - (Differences.First() * Gens);
-                        long part2Result = mysteryConstant + (Differences.First() * 50000000000);
+                        mysteryConstant = total - (SameDifferences.First() * Gens);
+                        long part2Result = mysteryConstant + (SameDifferences.First() * 50000000000);
                         Console.WriteLine("part 2: " + part2Result);
                         break;
                     }
