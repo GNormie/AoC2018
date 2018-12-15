@@ -29,9 +29,6 @@ namespace AoC2018
             Process.Start(pi);
 #endif
             #endregion
-
-            DAY14.Run();
-
             string[] linesInput = File.ReadAllLines(@"C:\puzzle14.txt");
             foreach (string line in linesInput)
             {
