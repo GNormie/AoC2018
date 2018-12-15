@@ -10,6 +10,76 @@ namespace AoC2018
 {
     public static class Util
     {
+        public static LinkedListNode<T> GetNextCircular<T>(LinkedListNode<T> currentNode, int? count = null)
+        {
+            if (count == null || count == 1)
+            {
+                currentNode = currentNode.Next != null ? currentNode.Next : currentNode.List.First;
+                return currentNode;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                currentNode = currentNode.Next != null ? currentNode.Next : currentNode.List.First;
+            }
+            return currentNode;
+        }
+
+        public static LinkedListNode<T> GetPreviousCircular<T>(LinkedListNode<T> currentNode, int? count = null)
+        {
+            if (count == null || count == 1)
+            {
+                currentNode = currentNode.Previous != null ? currentNode.Previous : currentNode.List.Last;
+                return currentNode;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                currentNode = currentNode.Previous != null ? currentNode.Previous : currentNode.List.Last;
+            }
+            return currentNode;
+        }
+
+        public static int GetPreviousCircular(int Count, int index, int? count = null)
+        {
+            if (count != null)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    index--; // decrement index
+                    if (index < 0)
+                    {
+                        index = Count - 1;
+                    }
+                }
+            }
+            else
+            {
+                index--; // decrement index
+                if (index < 0)
+                {
+                    index = Count - 1;
+                }
+            }
+            return index;
+        }
+
+        public static int GetNextCircular(int Count, int index, int? count = null)
+        {
+            if (count != null)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    index++; // increment index
+                    index %= Count;
+                }
+            }
+            else
+            {
+                index++; // increment index
+                index %= Count;
+            }
+            return index;
+        }
+
         public static void WriteToFile(StringBuilder sb)
         {
             File.WriteAllText(@"C:\OUTPUT.txt", String.Empty);

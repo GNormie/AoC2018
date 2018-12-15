@@ -18,27 +18,40 @@ namespace AoC2018
 {
     public static class DAY14
     {
-        static int initialRecipe = 37;
+        //static int initialRecipe = 37;
+
+
         static int iterations = 920831;
         static string strIterations = iterations.ToString();
-        static LinkedList<char> lstRecipes = new LinkedList<char>(initialRecipe.ToString().ToArray());
+        static LinkedList<byte> lstRecipes = new LinkedList<byte>();
 
-        static LinkedListNode<char> firstRecipe = lstRecipes.First;
-        static LinkedListNode<char> secondRecipe = lstRecipes.Last;
+        static LinkedListNode<byte> firstRecipe;// = lstRecipes.First;
+        static LinkedListNode<byte> secondRecipe;// = lstRecipes.Last;
 
         static bool breakPart2 = false;
 
-        static LinkedList<char> lstResult = new LinkedList<char>();
+        static LinkedList<byte> lstResult = new LinkedList<byte>();
 
-        public static void Part1()
+        public static void Run()
         {
+            Part1();
+            Part2();
+        }
+
+        private static void Part1()
+        {
+            lstRecipes.AddFirst(7);
+            lstRecipes.AddFirst(3);
+            firstRecipe = lstRecipes.First;
+            secondRecipe = lstRecipes.First.Next;
+
             for (int i = 0; i < 10 + iterations; i++)
             {
                 OperateRecipe(false);
             }
 
-            LinkedListNode<char> startPoint = lstRecipes.First;
-            var properPoint = GetNextCircular(startPoint, iterations);
+            LinkedListNode<byte> startPoint = lstRecipes.First;
+            var properPoint = Util.GetNextCircular(startPoint, iterations);
             for (int i = 0; i < 10; i++)
             {
                 lstResult.AddLast(properPoint.Value);
@@ -47,7 +60,7 @@ namespace AoC2018
             Console.WriteLine("PART 1: "+string.Concat(lstResult));
         }
 
-        public static void Part2()
+        private static void Part2()
         {
             while (breakPart2 == false)
             {
@@ -57,13 +70,13 @@ namespace AoC2018
 
         public static void OperateRecipe(bool part2)
         {
-            double firstRecipeInt = Char.GetNumericValue(firstRecipe.Value);
-            double secondRecipeInt = Char.GetNumericValue(secondRecipe.Value);
-            double newResult = firstRecipeInt + secondRecipeInt;
+            byte firstRecipeByte = firstRecipe.Value;
+            byte secondRecipeByte = secondRecipe.Value;
+            byte newResult = (byte)(firstRecipeByte + secondRecipeByte);
             var newRecipes = newResult.ToString().ToArray();
             foreach (char recipe in newRecipes)
             {
-                lstRecipes.AddLast(recipe);
+                lstRecipes.AddLast((byte)Char.GetNumericValue(recipe));
                 if (part2 == true)
                 {
                     if (lstRecipes.Count > strIterations.Length && getLastString() == strIterations)
@@ -74,35 +87,20 @@ namespace AoC2018
                 }
                 
             }
-            firstRecipe = GetNextCircular(firstRecipe, firstRecipeInt + 1);
-            secondRecipe = GetNextCircular(secondRecipe, secondRecipeInt + 1);
+            firstRecipe = Util.GetNextCircular(firstRecipe, firstRecipeByte + 1);
+            secondRecipe = Util.GetNextCircular(secondRecipe, secondRecipeByte + 1);
         }
 
         public static string getLastString()
         {
-            LinkedList<char> currResult = new LinkedList<char>();
-            var dude = lstRecipes.Last;
-            currResult.AddFirst(dude.Value);
-            currResult.AddFirst(dude.Previous.Value);
-            currResult.AddFirst(dude.Previous.Previous.Value);
-            currResult.AddFirst(dude.Previous.Previous.Previous.Value);
-            currResult.AddFirst(dude.Previous.Previous.Previous.Previous.Value);
-            currResult.AddFirst(dude.Previous.Previous.Previous.Previous.Previous.Value);
+            LinkedList<byte> currResult = new LinkedList<byte>();
+            var lastElement = lstRecipes.Last;
+            for (byte i = 0; i < strIterations.Length; i++)
+            {
+                currResult.AddFirst(lastElement.Value);
+                lastElement = lastElement.Previous;
+            }
             return string.Concat(currResult);
-        }
-
-        public static LinkedListNode<T> GetNextCircular<T>(LinkedListNode<T> currentNode, double? count = null)
-        {
-            if (count == null || count == 1)
-            {
-                currentNode = currentNode.Next != null ? currentNode.Next : currentNode.List.First;
-                return currentNode;
-            }
-            for (int i = 0; i < count; i++)
-            {
-                currentNode = currentNode.Next != null ? currentNode.Next : currentNode.List.First;
-            }
-            return currentNode;
         }
     }
 }

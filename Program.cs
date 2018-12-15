@@ -30,8 +30,7 @@ namespace AoC2018
 #endif
             #endregion
 
-            DAY14.Part1();
-            DAY14.Part2();
+            DAY14.Run();
 
             string[] linesInput = File.ReadAllLines(@"C:\puzzle14.txt");
             foreach (string line in linesInput)

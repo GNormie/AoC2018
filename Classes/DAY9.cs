@@ -41,7 +41,7 @@ namespace AoC2018
 
                 if (marble % 23 != 0)
                 {
-                    var insertPosition = GetNextCircular(leCurrentNode);
+                    var insertPosition = Util.GetNextCircular(leCurrentNode);
                     leCurrentNode = marbleCircle.AddAfter(insertPosition, currentMarble);
                 }
                 else
@@ -49,12 +49,12 @@ namespace AoC2018
                     var player = currentPlayer;//lstPlayers.SingleOrDefault(r => r.playerID == currentPlayer);
                     player.Value.score += marble;
 
-                    var insertPosition = GetPreviousCircular(leCurrentNode, 7);
+                    var insertPosition = Util.GetPreviousCircular(leCurrentNode, 7);
                     player.Value.score += insertPosition.Value;
-                    leCurrentNode = GetNextCircular(insertPosition);
+                    leCurrentNode = Util.GetNextCircular(insertPosition);
                     marbleCircle.Remove(insertPosition);
                 }
-                currentPlayer = GetNextCircular(currentPlayer);//lstPlayers.ElementAt(GetNextCircular(lstPlayers.Count, currentPlayer - 1)).playerID;
+                currentPlayer = Util.GetNextCircular(currentPlayer);//lstPlayers.ElementAt(GetNextCircular(lstPlayers.Count, currentPlayer - 1)).playerID;
             }
 
             return lstPlayers.Max(r => r.score);
@@ -74,76 +74,6 @@ namespace AoC2018
             {
                 playerID = _playerID;
             }
-        }
-
-        public static LinkedListNode<T> GetNextCircular<T>(LinkedListNode<T> currentNode, int? count = null)
-        {
-            if (count == null || count == 1)
-            {
-                currentNode = currentNode.Next != null ? currentNode.Next : currentNode.List.First;
-                return currentNode;
-            }
-            for (int i = 0; i < count; i++)
-            {
-                currentNode = currentNode.Next != null ? currentNode.Next : currentNode.List.First;
-            }
-            return currentNode;
-        }
-
-        public static LinkedListNode<T> GetPreviousCircular<T>(LinkedListNode<T> currentNode, int? count = null)
-        {
-            if (count == null || count == 1)
-            {
-                currentNode = currentNode.Previous != null ? currentNode.Previous : currentNode.List.Last;
-                return currentNode;
-            }
-            for (int i = 0; i < count; i++)
-            {
-                currentNode = currentNode.Previous != null ? currentNode.Previous : currentNode.List.Last;
-            }
-            return currentNode;
-        }
-
-        public static int GetPreviousCircular(int Count, int index, int? count = null)
-        {
-            if (count != null)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    index--; // decrement index
-                    if (index < 0)
-                    {
-                        index = Count - 1;
-                    }
-                }
-            }
-            else
-            {
-                index--; // decrement index
-                if (index < 0)
-                {
-                    index = Count - 1;
-                }
-            }
-            return index;
-        }
-
-        public static int GetNextCircular(int Count, int index, int? count = null)
-        {
-            if (count != null)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    index++; // increment index
-                    index %= Count;
-                }
-            }
-            else
-            {
-                index++; // increment index
-                index %= Count;
-            }
-            return index;
         }
     }
 }
