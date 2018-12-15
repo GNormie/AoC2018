@@ -20,12 +20,25 @@ namespace AoC2018
     {
         static void Main(string[] args)
         {
+            #region CONEMU
+#if DEBUG
+            ProcessStartInfo pi = new ProcessStartInfo(@"C:\cmder\vendor\conemu-maximus5\ConEmu\ConEmuC.exe", "/AUTOATTACH");
+            pi.CreateNoWindow = false;
+            pi.UseShellExecute = false;
+            //pi.WindowStyle = ProcessWindowStyle.Maximized;
+            Process.Start(pi);
+#endif
+            #endregion
+
+            DAY14.Part1();
+            DAY14.Part2();
+
             string[] linesInput = File.ReadAllLines(@"C:\puzzle14.txt");
             foreach (string line in linesInput)
             {
-
+            
             }
             Console.ReadLine();
-        }
+        }  
     }
 }
