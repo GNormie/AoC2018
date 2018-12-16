@@ -29,13 +29,12 @@ namespace AoC2018
             Process.Start(pi);
 #endif
             #endregion
-            /*
-            string[] linesInput = File.ReadAllLines(@"C:\puzzle15.txt");
+            string[] linesInput = File.ReadAllLines(@"C:\puzzle16.txt");
             foreach (string line in linesInput)
             {
 
-            }*/
-            DAY15.Run();
+            }
+
             Console.ReadLine();
         }  
     }

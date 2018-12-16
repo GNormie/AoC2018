@@ -260,10 +260,10 @@ namespace AoC2018
 
         }
 
-        public static Dictionary<Point, PrevPoint> PathFinding(Point punto, Dictionary<Point, PrevPoint> dctPoints, int cost)
+        public static Dictionary<Point, PrevPoint> PathFinding(Point myPosition, Dictionary<Point, PrevPoint> dctPoints, int cost)
         {
             Queue<Point> thisRevision = new Queue<Point>();
-            thisRevision.Enqueue(punto);
+            thisRevision.Enqueue(myPosition);
             while (thisRevision.Any())
             {
                 var qPoint = thisRevision.Dequeue();
@@ -282,7 +282,6 @@ namespace AoC2018
                     prevPoint.cost = 1;
                     prevPoint.prevPoint = qPoint;
                 }
-
 
                 if (!Unit.isObstructed(TOP) && !dctPoints.ContainsKey(TOP))
                 {
@@ -346,9 +345,9 @@ namespace AoC2018
                     if (unit != null)
                     {
                         if (unit.faction == Faction.Elf)
-                            sb.Append(unit.ID);//sb.Append((char)'E');
+                            sb.Append((char)'E');
                         else
-                            sb.Append(unit.ID);//sb.Append((char)'G');
+                            sb.Append((char)'G');
                     }
 
                     else
@@ -374,18 +373,6 @@ namespace AoC2018
         public static Point onMyBottom(Point p)
         {
             return new Point(p.X, p.Y + 1);
-        }
-
-        public static int ManhattanDist(Unit a, Unit b)
-        {
-            //(x1 - x2) + (y1 - y2)?
-            return Math.Abs(a.Position.X - b.Position.X) + Math.Abs(a.Position.Y - b.Position.Y);
-        }
-
-        public static int ManhattanDist(Point a, Point b)
-        {
-            //(x1 - x2) + (y1 - y2)?
-            return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
         }
 
         public enum Faction
