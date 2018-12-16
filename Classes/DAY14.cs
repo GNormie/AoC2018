@@ -61,7 +61,7 @@ namespace AoC2018
             }
         }
 
-        public static void OperateRecipe(bool part2)
+        private static void OperateRecipe(bool part2)
         {
             byte firstRecipeByte = firstRecipe.Value;
             byte secondRecipeByte = secondRecipe.Value;
@@ -95,7 +95,7 @@ namespace AoC2018
             secondRecipe = Util.GetNextCircular(secondRecipe, secondRecipeByte + 1);
         }
 
-        public static double getLastNumber()
+        private static double getLastNumber()
         {
             tempoResult = 0;
             var lastElement = lstRecipes.Last;
