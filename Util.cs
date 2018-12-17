@@ -104,6 +104,11 @@ namespace AoC2018
             return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Inputs\puzzle"+problemNumber+".txt");
         }
 
+        public static string ReadFromInputFolder(string problemNumber)
+        {
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Inputs\puzzle" + problemNumber + ".txt");
+        }
+
         public static string Between(this string value, string a, string b = null)
         {
             int posA = value.IndexOf(a);
