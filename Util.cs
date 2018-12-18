@@ -24,6 +24,18 @@ namespace AoC2018
             return currentNode;
         }
 
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            if (source == null)
+                throw new ArgumentNullException();
+            if(action == null)
+                throw new ArgumentNullException();
+            foreach (T element in source)
+            {
+                action(element);
+            }
+        }
+
         public static LinkedListNode<T> GetPreviousCircular<T>(LinkedListNode<T> currentNode, int? count = null)
         {
             if (count == null || count == 1)
