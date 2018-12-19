@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DAY19.cs" />
     <Compile Include="Classes\DAY18.cs" />
     <Compile Include="Classes\DAY17.cs" />
     <Compile Include="Classes\DAY16.cs" />
@@ -126,6 +127,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\puzzle18.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Inputs\puzzle19.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Inputs\puzzle2.txt">

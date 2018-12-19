@@ -153,7 +153,7 @@ namespace AoC2018
                 return false;
         }
 
-        static class AsmEmu
+        public static class AsmEmu
         {
             //Addition
             public static int[] addi(int[] register, int[] instruction)
