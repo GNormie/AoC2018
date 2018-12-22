@@ -405,14 +405,22 @@ namespace AoC2018
             }
 
             //Binary literal support exists only from C# 7.0 onwards so this will do for now
-            private static int BitwiseAnd(int A, int B)
+            public static int BitwiseAnd(int A, int B)
             {
-                char[] result = new char[4];
-
                 string binaryA = Convert.ToString(A, 2).PadLeft(4, '0');
                 string binaryB = Convert.ToString(B, 2).PadLeft(4, '0');
+                int newPadding = Math.Max(binaryA.Length, binaryB.Length);
 
-                for (int i = 0; i < binaryA.Length; i++)
+                char[] result = new char[newPadding];
+
+                if (binaryA.Length != binaryB.Length)
+                {
+                    
+                    binaryA = binaryA.PadLeft(newPadding,'0');
+                    binaryB = binaryB.PadLeft(newPadding,'0');
+                }
+
+                for (int i = 0; i < newPadding; i++)
                 {
                     if (binaryA[i] == '1' && binaryB[i] == '1')
                         result[i] = '1';
@@ -422,14 +430,22 @@ namespace AoC2018
 
                 return Convert.ToInt32(new string(result), 2);
             }
-            private static int BitwiseOr(int A, int B)
+            public static int BitwiseOr(int A, int B)
             {
-                char[] result = new char[4];
-
                 string binaryA = Convert.ToString(A, 2).PadLeft(4, '0');
                 string binaryB = Convert.ToString(B, 2).PadLeft(4, '0');
+                int newPadding = Math.Max(binaryA.Length, binaryB.Length);
 
-                for (int i = 0; i < binaryA.Length; i++)
+                char[] result = new char[newPadding];
+
+                if (binaryA.Length != binaryB.Length)
+                {
+
+                    binaryA = binaryA.PadLeft(newPadding, '0');
+                    binaryB = binaryB.PadLeft(newPadding, '0');
+                }
+
+                for (int i = 0; i < newPadding; i++)
                 {
                     if (binaryA[i] == '1' || binaryB[i] == '1')
                         result[i] = '1';
