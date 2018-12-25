@@ -17,6 +17,11 @@ namespace AoC2018
             return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
         }
 
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        {
+            return listToClone.Select(item => (T)item.Clone()).ToList();
+        }
+
         public class PriorityQueue<T>
         {
             private List<KeyValuePair<T, float>> elements = new List<KeyValuePair<T, float>>();
