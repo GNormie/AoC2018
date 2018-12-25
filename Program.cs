@@ -36,7 +36,7 @@ namespace AoC2018
 
             }
             */
-            DAY24.Run();
+            DAY25.Run();
             Console.ReadLine();
         }    
     }
